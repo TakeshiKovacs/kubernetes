@@ -26,7 +26,7 @@ kubectl get pods --all-namespaces=true
 kubectl get pods -n dev
 
 # Start an ssh session in the Dev Pod
-kubectl exec --stdin --tty nginx-dev-849767d67-tdtq6 -n dev -- /bin/bash
+kubectl exec --stdin --tty nginx-dev-849767d67-q82k2 -n dev -- /bin/bash
 
 # Test connectivity from Dev to Prod
 curl http://nginx-prod.prod.svc.cluster.local

@@ -22,3 +22,10 @@ spec:
         image: nginx:1.17
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: custom-html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: custom-html
+        configMap:
+          name: custom-v1-html

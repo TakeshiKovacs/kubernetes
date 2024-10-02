@@ -2,6 +2,7 @@
 kubectl label namespace default istio-injection=enabled
 
 # Now lets create a v1 of an application, the app doesn't matter so good old nginx
+kubectl apply -f custom-v1-html.yaml
 kubectl apply -f my-app-v1.yaml
 
 # Now we will expose this as a service
@@ -16,6 +17,7 @@ kubectl apply -f my-app-virtual-service.yaml
 kubectl apply -f my-app-destination-rule.yaml
 
 # Now lets deploy a new version of our app, we just change the version of nginx in this case
+kubectl apply -f custom-v2-html.yaml
 kubectl apply -f my-app-v2.yaml
 
 # Now update our destination rule, my-app-destination-rule.yaml, with the below, this lets it know about version 2
