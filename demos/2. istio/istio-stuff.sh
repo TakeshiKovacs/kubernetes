@@ -16,6 +16,10 @@ kubectl apply -f my-app-gateway.yaml
 kubectl apply -f my-app-virtual-service.yaml
 kubectl apply -f my-app-destination-rule.yaml
 
+# Hit it!
+INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+for i in {1..10}; do curl http://$INGRESS_HOST; done
+
 # Now lets deploy a new version of our app, we just change the version of nginx in this case
 kubectl apply -f custom-v2-html.yaml
 kubectl apply -f my-app-v2.yaml
@@ -59,7 +63,7 @@ spec:
         subset: v2
       weight: 10
 
-kubectl apply -f my-app-virtualservice.yaml
+kubectl apply -f my-app-virtual-service.yaml
 
 # Now lets look at the traffic splitting
 INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
