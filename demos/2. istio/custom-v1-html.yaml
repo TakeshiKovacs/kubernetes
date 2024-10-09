@@ -1,3 +1,4 @@
+# A config map is an object we create that allows us to pass configuration to a Pod easily
 apiVersion: v1
 kind: ConfigMap
 metadata:

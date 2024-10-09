@@ -13,3 +13,7 @@ spec:
         host: my-app
         subset: v1
       weight: 100
+    # - destination:
+    #     host: my-app
+    #     subset: v2
+    #   weight: 100

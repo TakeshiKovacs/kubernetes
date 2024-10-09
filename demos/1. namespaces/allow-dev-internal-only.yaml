@@ -1,0 +1,21 @@
+# Which version of which Kubernetes API are we targeting
+apiVersion: networking.k8s.io/v1
+# This tells the API that this is a Network Policy
+kind: NetworkPolicy
+metadata:
+  # This is the name of our policy
+  name: allow-internal-only
+  # Apply this policy to the dev namespace
+  namespace: dev
+spec:
+  # Apply to Pods that match this criteria, in this instance we have a an empty dictionary in our podSelector
+  # This means all Pods within the same namespace
+  podSelector: {}
+  # This policy only has Ingress policies
+  policyTypes:
+  - Ingress
+  # For ingress to this namespace
+  ingress:
+  # Only allow from Pods within the same namespace
+  - from:
+    - podSelector: {}

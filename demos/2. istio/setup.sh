@@ -1,3 +1,11 @@
+# First of all, what is Istio?  Istio is a service mesh
+# Ok, so what is a service mesh?
+
+# A service mesh is an infrastructure layer that gives applications capabilities like zero-trust security, observability, and advanced traffic management, without code changes.
+
+# Lets go home
+cd ~
+
 # Install istio command line
 curl -L https://istio.io/downloadIstio | sh -
 

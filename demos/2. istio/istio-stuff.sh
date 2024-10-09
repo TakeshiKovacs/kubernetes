@@ -1,7 +1,13 @@
+# We will look at the traffic management capability in this demo
+
+# Back to Demo folder
+cd src/kubernetes/demos/2.\ istio/
+
 # Apply a laebl to the default namespace so istio knows to interact with pods we create there
 kubectl label namespace default istio-injection=enabled
 
 # Now lets create a v1 of an application, the app doesn't matter so good old nginx
+# Note we are creating these Pods using a deployment
 kubectl apply -f custom-v1-html.yaml
 kubectl apply -f my-app-v1.yaml
 
@@ -20,7 +26,7 @@ kubectl apply -f my-app-destination-rule.yaml
 INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 for i in {1..10}; do curl http://$INGRESS_HOST; done
 
-# Now lets deploy a new version of our app, we just change the version of nginx in this case
+# Now lets deploy a new version of our app, we just change the version of nginx and also the html...
 kubectl apply -f custom-v2-html.yaml
 kubectl apply -f my-app-v2.yaml
 
