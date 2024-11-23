@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: blue-green-demo
+  namespace: default
+spec:
+  replicas: 2
+  strategy:
+    blueGreen:
+      activeService: blue-green-active
+      previewService: blue-green-preview
+      autoPromotionEnabled: false # Manual promotion
+  selector:
+    matchLabels:
+      app: blue-green-demo
+  template:
+    metadata:
+      labels:
+        app: blue-green-demo
+    spec:
+      containers:
+      - name: demo-app
+        image: nginx:1.20 # Initial version
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green-active
+  namespace: default
+spec:
+  selector:
+    app: blue-green-demo
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green-preview
+  namespace: default
+spec:
+  selector:
+    app: blue-green-demo
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
