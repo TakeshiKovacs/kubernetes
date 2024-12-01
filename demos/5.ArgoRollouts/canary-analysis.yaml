@@ -9,12 +9,12 @@ spec:
     canary:
       steps:
       - setWeight: 25
-      - pause: { duration: 30s }
+      - pause: { duration: 15s }
       - setWeight: 50
       - analysis:
           templates:
           - templateName: success-rate
-      - pause: { duration: 30s }
+      - pause: { duration: 15s }
   selector:
     matchLabels:
       app: canary-analysis-demo
@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: demo-app
-        image: nginx:1.18 # Initial version
+        image: nginx:1.17 # Initial version
         ports:
         - containerPort: 80
 ---
